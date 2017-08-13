@@ -2,10 +2,7 @@
 {% block news_active %}active{% endblock %}
 {% block body%}
 <h1>Your link is here</h1>
-    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 
-             <input type="text" name="source_url">
-
-    </form>
+    <a href="{% view 'dest_link'%}">link for downloading</a>
 
 {% endblock %}

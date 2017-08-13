@@ -2,11 +2,20 @@
 {% block news_active %}active{% endblock %}
 {% block body%}
 <h1>Input youtube adress here</h1>
-    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="/url" method="post">
+    {% csrf_token %}
 
-             <input type="text" name="source_url">
+    <input type="text" name="source_url">
 
-             <button type="submit" class="btn btn-success">Public</button>
+        <input type="submit" value="Submit" class="btn btn-success" onClick="redirect()">
+
     </form>
 
+ <script type="text/javascript">
+    function redirect()
+    {
+    var url = "{%url 'saver'}";
+    window.location(url);
+    }
+    </script>
 {% endblock %}
