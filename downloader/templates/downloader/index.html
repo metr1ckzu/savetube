@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-index page
-</body>
-</html>
+{% extends 'downloader/base.html' %}
+{% block news_active %}active{% endblock %}
+{% block body%}
+<h1>Input youtube adress here</h1>
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+
+             <input type="text" name="source_url">
+
+             <button type="submit" class="btn btn-success">Public</button>
+    </form>
+
+{% endblock %}
