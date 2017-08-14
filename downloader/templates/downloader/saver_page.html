@@ -1,8 +1,11 @@
-{% extends 'downloader/base.html' %}
-{% block news_active %}active{% endblock %}
-{% block body%}
-<h1>Your link is here</h1>
-
-    <a href="{% view 'dest_link'%}">link for downloading</a>
-
-{% endblock %}
+<html>
+<head>
+    <meta charset="utf">
+    <title>Donwload mp3 from youtube</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://www.youtubeinmp3.com//css/button.css?v=1.4.1">
+</head>
+<body>
+    {{ result_url_body|safe }}
+</body>
+</html>

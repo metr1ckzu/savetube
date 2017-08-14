@@ -2,12 +2,11 @@
 {% block news_active %}active{% endblock %}
 {% block body%}
 <h1>Input youtube adress here</h1>
-    <form class="form-horizontal" action="/submit" method="post">
+    <form class="form-horizontal" action="/submit/" method="post">
     {% csrf_token %}
 
     <input type="text" name="source_url">
-
-        <input type="submit" value="Submit" class="btn btn-success" ">
+        <input type="submit" value="Submit" class="btn btn-success">
 
     </form>
 

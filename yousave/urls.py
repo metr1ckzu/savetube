@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.submit, name='index'),
     url(r'^submit/$', views.submit, name='index'),
-    url(r'^saver/$', views.result, name='saver'),
+    #url(r'^saver/[\S]+/$', views.result, name='saver'),
 ]
