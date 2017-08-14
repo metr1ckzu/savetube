@@ -5,6 +5,7 @@ from downloader import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^saver/$', views.SaveView.as_view(), name='saver'),
+    url(r'^$', views.submit, name='index'),
+    url(r'^submit/$', views.submit, name='index'),
+    url(r'^saver/$', views.result, name='saver'),
 ]

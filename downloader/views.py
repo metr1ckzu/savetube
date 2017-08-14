@@ -1,24 +1,21 @@
-from django.http import HttpResponse
-from django.shortcuts import render_to_response
-from django.views.generic import TemplateView
+from django.shortcuts import redirect, render
 from downloader.models import Saver
-from youtube_dl import YoutubeDL
+
+import requests
+from bs4 import BeautifulSoup
 
 
-class IndexView(TemplateView):
+def submit(request):
     template_name = 'downloader/index.html'
-
-    def redirect(request):
-        source_link = Saver()
-        source_link.source_url = request.POST['source_url']
+    if request.method == 'POST':
+        source_link = Saver(data.request.POST)
         source_link.save()
-        return render_to_response('downloader/saver_page.html')
+        return redirect('downloader/saver_page/%s/' % source_link_id)
+    return render(request, template_name, {})
 
-    def saver_link(request):
-        source_link = Saver()
-        dest_link = YoutubeDL().extract_info(source_link, download=False)
-        return dest_link
-        #return HttpResponse({ % dest_link %})
+def result(request, source_link_id):
+    result_url = requests.get('http://www.youtubeinmp3.com/widget/button/?id={}'.format(source_link_id))
+    result_url.encoding = 'utf-8'
+    result_url_body = BeautifulSoup(result_url.text)
 
-class SaveView(TemplateView):
-    template_name = 'downloader/saver_page.html'
+    return render(request, template_name, {'result_url_body': result_url_body})
