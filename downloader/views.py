@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import render
+from .models import Saver
 
 import requests
 from bs4 import BeautifulSoup
@@ -10,6 +11,8 @@ def submit(request):
     if request.method == 'POST':
 
         source = request.POST['source_url']
+        source_log = Saver(source_link=source)
+        source_log.save()
         result_url = requests.get('http://www.youtubeinmp3.com/widget/button/?id={}'.format(source))
         result_url.encoding = 'utf-8'
         result_url_parsed = BeautifulSoup(result_url.content)
