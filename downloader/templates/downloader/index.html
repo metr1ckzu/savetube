@@ -1,7 +1,7 @@
 {% extends 'downloader/base.html' %}
 {% block news_active %}active{% endblock %}
 {% block body%}
-<h1>Input youtube adress here</h1>
+<h1>Input Youtube video url</h1>
     <form class="form-horizontal" action="/submit/" method="post">
     {% csrf_token %}
 
