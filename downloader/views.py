@@ -1,25 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Saver
 
-import requests
-from bs4 import BeautifulSoup
+from youtube_dl import YoutubeDL
 
 
 def submit(request):
     template_name = 'downloader/index.html'
-    result_template_name = 'downloader/saver_page.html'
+
     if request.method == 'POST':
 
         source = request.POST['source_url']
         source_log = Saver(source_link=source)
         source_log.save()
-        result_url = requests.get('http://www.youtubeinmp3.com/widget/button/?id={}'.format(source))
-        result_url.encoding = 'utf-8'
-        result_url_parsed = BeautifulSoup(result_url.content)
-        old_download_link = result_url_parsed.html.body.a['href']
-        result_url_parsed.html.body.a['href'] = 'http://www.youtubeinmp3.com/' + old_download_link
-        result_url_body = result_url_parsed.html.body
-        return render(request, result_template_name, {'result_url_body': result_url_body})
+
+        with YoutubeDL(dict(forceurl=True)) as ydl:
+            video_info = ydl.extract_info(source, download=False)
+            video_url = video_info['formats'][-1]['url']
+            return redirect(video_url)
 
 
-    return render(request, template_name, {})
+    return render(request, template_name)
